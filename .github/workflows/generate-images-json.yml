@@ -1,0 +1,35 @@
+name: Generate Images JSON
+
+on:
+  push:
+    paths:
+      - 'hoho/**' # 當 hoho 資料夾中的文件發生改變時觸發
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Generate images.json
+      run: |
+        echo "[" > images.json
+        for file in hoho/*.jpg; do
+          filename=$(basename "$file")
+          start=$(echo $filename | cut -d'-' -f1)
+          end=$(echo $filename | cut -d'-' -f2 | cut -d'.' -f1)
+          echo "  { \"path\": \"$file\", \"start\": \"$start\", \"end\": \"$end\" }," >> images.json
+        done
+        # Remove the last comma and close the JSON array
+        sed -i '$ s/,$//' images.json
+        echo "]" >> images.json
+
+    - name: Commit and push images.json
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add images.json
+        git commit -m 'Update images.json'
+        git push
