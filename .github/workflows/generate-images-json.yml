@@ -3,7 +3,7 @@ name: Generate Images JSON
 on:
   push:
     paths:
-      - 'hoho/**' # 當 hoho 資料夾中的文件發生改變時觸發
+      - './hoho/**' # 當 hoho 資料夾中的文件發生改變時觸發
 
 jobs:
   build:
