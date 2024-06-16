@@ -26,6 +26,12 @@ jobs:
         sed -i '$ s/,$//' images.json
         echo "]" >> images.json
 
+    - name: Save images.json as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: images-json
+        path: images.json
+
     - name: Commit and push images.json
       env:
         ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
