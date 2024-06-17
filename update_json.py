@@ -19,7 +19,7 @@ for file_name in filtered_files:
     path = os.path.join(hoho_path, file_name)
     # Extract the start and end dates
     start_date = file_name[2:10]
-    end_date = '20' + file_name[11:15]
+    end_date = file_name[2:6] + file_name[11:15]
 
     # Create a dictionary with the extracted data
     file_data = {
