@@ -10,7 +10,7 @@ json_file_path = 'hoho.json'
 files = os.listdir(hoho3_path)
 
 # Filter for files that match the pattern 和和3-YYYYMMDD.jpg, 和和3-YYYYMMDD-MMDD.jpg, 和和3-YYYYMMDD-YYYYMMDD.jpg
-filtered_files = [f for f in files if f.startswith('和和3-') and f.endswith('.jpg')]
+filtered_files = [f for f in files if f.startswith('診所') and f.endswith('.jpg')]
 
 # Initialize an empty list to hold the JSON data
 json_data = []
