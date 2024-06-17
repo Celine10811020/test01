@@ -8,7 +8,7 @@ hoho3_path = 'hoho3'
 json_file_path = 'hoho3.json'
 
 # Get the list of changed files from the command line argument
-with open(sys.argv[1], 'r') as f:
+with open(sys.argv[1], 'r', encoding='utf-8') as f:
     changed_files = [line.strip() for line in f]
 
 # Initialize an empty list to hold the JSON data
