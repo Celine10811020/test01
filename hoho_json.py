@@ -51,7 +51,8 @@ for file_name in changed_files:
         print(f"Skipping {file_name} as it does not match expected format.")
 
 # Write the JSON data to the file
-with open(json_file_path, 'w', encoding='utf-8') as json_file:
+with open(json_file_path, 'a', encoding='utf-8') as json_file:
     json.dump(json_data, json_file, ensure_ascii=False, indent=2)
+    json_file.write('\n')
 
 print(f'Updated {json_file_path} with {len(json_data)} entries.')
