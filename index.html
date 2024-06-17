@@ -1,76 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>能量捐獻查詢</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-        }
-        input[type="date"] {
-            padding: 10px;
-            margin: 20px 0;
-            font-size: 16px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <title>顯示圖片</title>
 </head>
+
 <body>
-    <div class="container">
-        <h1>能量捐獻查詢</h1>
-        <input type="date" id="dateInput">
-        <button onclick="searchImage()">查詢</button>
-        <div id="imageContainer"></div>
-    </div>
-
-    <script>
-        let imageList = [];
-
-        async function fetchImages() {
-            const response = await fetch('images.json');
-            imageList = await response.json();
-        }
-
-        function searchImage() {
-            const dateInput = document.getElementById('dateInput').value;
-            if (!dateInput) {
-                alert('請輸入日期');
-                return;
-            }
-            const date = new Date(dateInput);
-            const dateString = date.toISOString().split('T')[0].replace(/-/g, '');
-
-            const image = imageList.find(img => dateString >= img.start && dateString <= img.end);
-
-            const imageContainer = document.getElementById('imageContainer');
-            imageContainer.innerHTML = '';
-            if (image) {
-                const imgElement = document.createElement('img');
-                imgElement.src = image.path;
-                imgElement.alt = '能量捐獻統計';
-                imageContainer.appendChild(imgElement);
-            } else {
-                imageContainer.textContent = '找不到對應日期的能量捐獻統計圖片。';
-            }
-        }
-
-        // Fetch images when the page loads
-        window.onload = fetchImages;
-    </script>
+  <div class="container">
+    <h1>輸入日期查看圖片</h1>
+    <input id="inputDate">
+    <button onclick="showImages()">顯示圖片</button>
+    <div id="imageContainer"></div>
+  </div>
 </body>
+
+<script src="main.js"></script>
+
 </html>
