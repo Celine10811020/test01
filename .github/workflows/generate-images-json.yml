@@ -31,7 +31,7 @@ jobs:
           start=$(echo $filename | sed -n 's/.*診所\([0-9]\{8\}\)-\([0-9]\{4\}\).*/\1/p')
           end=$(echo $filename | sed -n 's/.*診所\([0-9]\{8\}\)-\([0-9]\{4\}\).*/\2/p')
           # 構建新的 json 對象
-          new_image=$(jq -n --arg path "$file" --arg start "$start" --arg end "$end" '{path: $path, start: $start, end: $end}')
+          new_image=$(jq -n --arg path "hoho/$filename" --arg start "$start" --arg end "$end" '{path: $path, start: $start, end: $end}')
           # 將新對象添加到新的數組中
           new_images=$(echo $new_images | jq ". + [$new_image]")
         done
