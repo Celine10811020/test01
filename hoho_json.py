@@ -21,9 +21,9 @@ if os.path.exists(json_file_path):
 
 # Define regex patterns for each filename format
 patterns = [
-    r'診所(\d{8})\.jpg',  # 和和3-YYYYMMDD.jpg
-    r'診所(\d{8})-(\d{4})\.jpg',  # 和和3-YYYYMMDD-MMDD.jpg
-    r'診所(\d{8})-(\d{8})\.jpg'  # 和和3-YYYYMMDD-YYYYMMDD.jpg
+    r'\350\250\272\346\211\(\d{8})\.jpg',  # 和和3-YYYYMMDD.jpg
+    r'\350\250\272\346\211\(\d{8})-(\d{4})\.jpg',  # 和和3-YYYYMMDD-MMDD.jpg
+    r'\350\250\272\346\211\(\d{8})-(\d{8})\.jpg'  # 和和3-YYYYMMDD-YYYYMMDD.jpg
 ]
 
 # Function to parse the filename and extract dates
