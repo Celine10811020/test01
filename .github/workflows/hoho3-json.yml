@@ -3,7 +3,7 @@ name: Update JSON
 on:
   push:
     paths:
-      - 'hoho/診所*.jpg'
+      - 'hoho3/和和3-*.jpg'
 
 jobs:
   update-json:
@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Update JSON file
-        run: python update_json.py
+        run: python hoho3_json.py
 
       - name: Commit and push changes
         env:
