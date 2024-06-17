@@ -9,7 +9,7 @@ json_file_path = 'hoho.json'
 
 # Get the list of changed files from the command line argument
 with open(sys.argv[1], 'r', encoding='utf-8') as f:
-    changed_files = [line.strip().encode('utf-8').decode('utf-8') for line in f]
+    changed_files = [line.strip().strip('"').decode() for line in f]
 
 print("Changed files:", changed_files)  # 输出更改的文件以供调试
 
