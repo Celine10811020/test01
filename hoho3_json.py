@@ -1,19 +1,22 @@
 import os
+import sys
 import json
-import re
 
 # Define the path to the hoho folder and JSON file
 hoho3_path = 'hoho3'
 json_file_path = 'hoho3.json'
 
-# List all files in the hoho folder
-files = os.listdir(hoho3_path)
-
-# Filter for files that match the pattern 和和3-YYYYMMDD.jpg, 和和3-YYYYMMDD-MMDD.jpg, 和和3-YYYYMMDD-YYYYMMDD.jpg
-filtered_files = [f for f in files if f.startswith('和和3-') and f.endswith('.jpg')]
+# Get the list of changed files from the command line argument
+with open(sys.argv[1], 'r') as f:
+    changed_files = [line.strip() for line in f]
 
 # Initialize an empty list to hold the JSON data
 json_data = []
+
+# Load the existing JSON data if the file exists
+if os.path.exists(json_file_path):
+    with open(json_file_path, 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
 
 # Define regex patterns for each filename format
 patterns = [
@@ -22,13 +25,8 @@ patterns = [
     r'和和3-(\d{8})-(\d{8})\.jpg'  # 和和3-YYYYMMDD-YYYYMMDD.jpg
 ]
 
-# Iterate over the filtered files and extract the necessary information
-for file_name in filtered_files:
-    path = os.path.join(hoho3_path, file_name)
-    start_date = None
-    end_date = None
-
-    # Check which pattern the filename matches
+# Function to parse the filename and extract dates
+def parse_filename(file_name):
     for pattern in patterns:
         match = re.match(pattern, file_name)
         if match:
@@ -41,7 +39,13 @@ for file_name in filtered_files:
                     end_date = start_date[:4] + match.group(2)
                 else:
                     end_date = match.group(2)
-            break
+            return start_date, end_date
+    return None, None
+
+# Iterate over the changed files and extract the necessary information
+for file_name in changed_files:
+    path = os.path.join(hoho3_path, os.path.basename(file_name))
+    start_date, end_date = parse_filename(os.path.basename(file_name))
 
     if start_date and end_date:
         # Create a dictionary with the extracted data
