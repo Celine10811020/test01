@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import re
 
 # Define the path to the hoho folder and JSON file
 hoho3_path = 'hoho3'
