@@ -12,9 +12,16 @@
 
 <body>
   <div class="container">
-    <h1>輸入日期查詢</h1>
+    <h1>Walkr能量捐贈查詢</h1>
+    <div class="select-container">
+      <select name="select" id="selectLab">
+        <option value="0" selected>實驗室</option>
+        <option value="1">和和聯合</option>
+        <option value="2">和和3館</option>
+      </select>
+    </div>
     <input id="inputDate" placeholder="YYYYMMDD">
-    <button onclick="showImages()">顯示圖片</button>
+    <button onclick="showImages()">查詢</button>
     <div id="imageContainer"></div>
   </div>
 </body>

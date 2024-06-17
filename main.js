@@ -1,9 +1,28 @@
 function showImages() {
   const inputDate = document.getElementById('inputDate').value;
   const imageContainer = document.getElementById('imageContainer');
+  const selection = document.getElementById('selectLab').value;
+  let url;
 
-  const url_hoho = 'https://celine10811020.github.io/test01/hoho.json';
-  const url_hoho3 = 'https://celine10811020.github.io/test01/hoho3.json';
+  if(selection == "1")
+  {
+    url = 'https://celine10811020.github.io/test01/hoho.json';
+  }else if(selection == "2")
+  {
+    url = 'https://celine10811020.github.io/test01/hoho3.json';
+  }else
+  {
+    imageContainer.innerHTML = '<p>請選擇實驗室。</p>';
+    return;
+  }
+
+console.log(selection);
+
+  if(inputDate == "")
+  {
+    imageContainer.innerHTML = '<p>請輸入日期。</p>';
+    return;
+  }
 
   // Fetch images data from JSON file (or you can hardcode it in JS if preferred)
   fetch(url)
@@ -33,7 +52,7 @@ function showImages() {
         imageContainer.appendChild(imageElement);
         imageContainer.appendChild(closeButton);
       } else {
-        imageContainer.innerHTML = '<p>找不到符合日期範圍的圖片。</p>';
+        imageContainer.innerHTML = '<p>找不到符合日期範圍的結果。<br>請檢查輸入格式是否錯誤。</p>';
       }
     })
     .catch(error => {
