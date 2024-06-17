@@ -9,7 +9,9 @@ json_file_path = 'hoho.json'
 
 # Get the list of changed files from the command line argument
 with open(sys.argv[1], 'r', encoding='utf-8') as f:
-    changed_files = [line.strip() for line in f]
+    changed_files = [line.strip().strip('"') for line in f]  # 从命令行参数读取 changed_files.txt 文件，并去除引号
+
+print("Changed files:", changed_files)  # 输出更改的文件以供调试
 
 # Initialize an empty list to hold the JSON data
 json_data = []
@@ -21,9 +23,9 @@ if os.path.exists(json_file_path):
 
 # Define regex patterns for each filename format
 patterns = [
-    r'\350\250\272\346\211\(\d{8})\.jpg',  # 和和3-YYYYMMDD.jpg
-    r'\350\250\272\346\211\(\d{8})-(\d{4})\.jpg',  # 和和3-YYYYMMDD-MMDD.jpg
-    r'\350\250\272\346\211\(\d{8})-(\d{8})\.jpg'  # 和和3-YYYYMMDD-YYYYMMDD.jpg
+    r'診所(\d{8})\.jpg',
+    r'診所(\d{8})-(\d{4})\.jpg',
+    r'診所(\d{8})-(\d{8})\.jpg'
 ]
 
 # Function to parse the filename and extract dates
