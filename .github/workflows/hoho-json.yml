@@ -28,6 +28,9 @@ jobs:
           git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- hoho/診所*.jpg > changed_files.txt
           cat changed_files.txt
 
+      - name: Display changed files (for debugging)
+        run: cat changed_files.txt
+
       - name: Update hoho JSON file
         run: python hoho_json.py changed_files.txt
 
