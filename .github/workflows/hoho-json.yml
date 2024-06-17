@@ -25,14 +25,14 @@ jobs:
         id: changed-files
         run: |
           git fetch origin ${{ github.event.before }} --depth=1
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- hoho/診所*.jpg > changed_files.txt
-          cat changed_files.txt
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- hoho/診所*.jpg | sed -E 's/hoho\/診所([0-9]+(-[0-9]+)?(-[0-9]+)?).jpg/\1/g' > changed_files.txt
+          cat changed_files.txt  # 显示 changed_files.txt 的内容
 
       - name: Display changed files (for debugging)
         run: cat changed_files.txt
 
       - name: Update hoho JSON file
-        run: python hoho_json.py changed_files.txt
+        run: python hoho_json.py changed_files.txt  # 传递 changed_files.txt 路径给 Python 脚本
 
       - name: Commit and push changes
         env:
