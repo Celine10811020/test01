@@ -1,10 +1,24 @@
-window.onload = function() {
-  loadCSV('./planets.csv');
-};
-
 document.addEventListener('DOMContentLoaded', function () {
   const tableBody = document.querySelector('#planets-table tbody');
-  const searchInput = document.getElementById('search-input');
+  const searchInput = document.getElementById('search');
+
+  function loadCSV(file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split('\n').slice(1).filter(row => row.trim() !== '');
+        rows.forEach(row => {
+          const cols = row.split(',');
+          const tr = document.createElement('tr');
+          cols.forEach(col => {
+            const td = document.createElement('td');
+            td.textContent = col.trim();
+            tr.appendChild(td);
+          });
+        tableBody.appendChild(tr);
+      });
+    });
+  }
 
   function filterTable() {
     const searchTerm = searchInput.value.toLowerCase();
@@ -25,23 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  loadCSV('https://celine10811020.github.io/test01/planets/planets.csv');
+
   searchInput.addEventListener('input', filterTable);
 });
-
-function loadCSV(file) {
-  fetch(file)
-    .then(response => response.text())
-    .then(data => {
-      const rows = data.split('\n').slice(1);
-      rows.forEach(row => {
-        const cols = row.split(',');
-        const tr = document.createElement('tr');
-        cols.forEach(col => {
-          const td = document.createElement('td');
-          td.textContent = col.trim();
-          tr.appendChild(td);
-        });
-      tableBody.appendChild(tr);
-    });
-  });
-}
