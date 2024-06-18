@@ -1,12 +1,16 @@
 body {
   font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
   margin: 0;
 }
 
 .container {
+  flex: 1;
+  margin: 20px auto;
   text-align: center;
 }
 
@@ -94,4 +98,71 @@ button:hover {
 
 .close-btn:hover {
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+#information {
+  border: 1px solid #333;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* 調整陰影以使其更柔和 */
+  padding: 20px; /* 增加內邊距以提供更多空間 */
+  text-align: center;
+  background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+  border-radius: 8px; /* 添加圓角 */
+  width: 90vw;
+  position: relative;
+  bottom: 0;
+}
+
+#information p {
+  margin: 0; /* 確保段落沒有額外的邊距 */
+  font-size: 20px;
+  color: #333;
+}
+#information p.link {
+  font-size: 16px;
+  margin-top: 10px;
+}
+#information a {
+  color: #007bff;
+  text-decoration: none;
+}
+#information a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 450px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  #inputDate {
+    width: calc(100% - 18px);
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  #information {
+    padding: 10px;
+    box-shadow: none;
+  }
+  #information p {
+    font-size: 14px;
+  }
+  #information a {
+    font-size: 14px;
+  }
 }
